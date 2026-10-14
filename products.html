@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products - Bromantic Enterprise</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { primary: '#1e3a5f', accent: '#3b82f6', dark: '#0f172a' },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+      50% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+    }
+    .wa-pulse { animation: pulse-green 2s infinite; }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-dark/95 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        <a href="index.html" class="flex items-center gap-2 group">
+          <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-blue-600/30">B</div>
+          <div class="leading-tight">
+            <span class="text-white font-bold text-lg tracking-tight">Bromantic</span>
+            <span class="text-blue-400 font-medium text-sm block -mt-0.5">Enterprise</span>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="text-gray-300 hover:text-white transition">Home</a>
+          <a href="products.html" class="text-white font-medium border-b-2 border-blue-500 pb-0.5">Products</a>
+          <a href="about.html" class="text-gray-300 hover:text-white transition">About Us</a>
+          <a href="gallery.html" class="text-gray-300 hover:text-white transition">Gallery</a>
+          <a href="contact.html" class="text-gray-300 hover:text-white transition">Contact</a>
+        </nav>
+        <a href="custom-order.html" class="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition">Custom Order</a>
+        <button id="mobile-menu-btn" class="md:hidden text-white p-2">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-dark border-t border-white/10">
+      <div class="px-4 py-4 space-y-3">
+        <a href="index.html" class="block text-gray-300">Home</a>
+        <a href="products.html" class="block text-white font-medium">Products</a>
+        <a href="about.html" class="block text-gray-300">About Us</a>
+        <a href="gallery.html" class="block text-gray-300">Gallery</a>
+        <a href="contact.html" class="block text-gray-300">Contact</a>
+        <a href="custom-order.html" class="block text-gray-300">Custom Order</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="pt-28 pb-12 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-blue-600 text-sm font-semibold tracking-widest uppercase mb-2">Our Catalog</p>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">Products</h1>
+      <p class="text-gray-500 max-w-2xl mx-auto">Browse our range of high-quality 3D printed products. From keychains to custom props — we bring your ideas to life.</p>
+    </div>
+  </section>
+
+  <!-- Category Filter -->
+  <section class="py-8 border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap justify-center gap-3">
+        <button class="filter-btn active px-5 py-2 rounded-full bg-blue-600 text-white text-sm font-medium" data-filter="all">All</button>
+        <button class="filter-btn px-5 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200" data-filter="keychains">Key Chains</button>
+        <button class="filter-btn px-5 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200" data-filter="toys">Toys</button>
+        <button class="filter-btn px-5 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200" data-filter="display">Display Items</button>
+        <button class="filter-btn px-5 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200" data-filter="props">Props & Accessories</button>
+        <button class="filter-btn px-5 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200" data-filter="custom">Custom</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
+
+        <!-- Product 1 -->
+        <a href="product-details.html?id=dragon" class="product-card product-item bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm transition duration-300" data-category="toys">
+          <div class="aspect-square overflow-hidden bg-gray-50">
+            <img src="images/red-dragon.jpg" alt="Dragon Toy" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-medium text-blue-600 uppercase tracking-wide">Toys</span>
+            <h3 class="font-bold text-lg text-gray-900 mt-1">Dragon Toy (Articulated)</h3>
+            <p class="text-gray-500 text-sm mt-1 mb-3">Fully articulated dragon with poseable joints.</p>
+            <p class="text-blue-600 font-bold">RM 45.00</p>
+          </div>
+        </a>
+
+        <!-- Product 2 -->
+        <a href="product-details.html?id=pikachu" class="product-card product-item bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm transition duration-300" data-category="keychains">
+          <div class="aspect-square overflow-hidden bg-gray-50">
+            <img src="images/pikachu.jpg" alt="Pikachu Keychain" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='images/keychains.jpg'">
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-medium text-blue-600 uppercase tracking-wide">Key Chains</span>
+            <h3 class="font-bold text-lg text-gray-900 mt-1">Pikachu Keychain</h3>
+            <p class="text-gray-500 text-sm mt-1 mb-3">Cute and durable character keychain.</p>
+            <p class="text-blue-600 font-bold">RM 15.00</p>
+          </div>
+        </a>
+
+        <!-- Product 3 -->
+        <a href="product-details.html?id=castle" class="product-card product-item bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm transition duration-300" data-category="display">
+          <div class="aspect-square overflow-hidden bg-gray-50">
+            <img src="images/castle.jpg" alt="Mini Castle" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-medium text-blue-600 uppercase tracking-wide">Display Items</span>
+            <h3 class="font-bold text-lg text-gray-900 mt-1">Mini Castle Display</h3>
+            <p class="text-gray-500 text-sm mt-1 mb-3">Detailed miniature castle for desk or shelf.</p>
+            <p class="text-blue-600 font-bold">RM 80.00</p>
+          </div>
+        </a>
+
+        <!-- Product 4 -->
+        <a href="product-details.html?id=keychain-set" class="product-card product-item bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm transition duration-300" data-category="keychains">
+          <div class="aspect-square overflow-hidden bg-gray-50">
+            <img src="images/keychains.jpg" alt="Character Keychains" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-medium text-blue-600 uppercase tracking-wide">Key Chains</span>
+            <h3 class="font-bold text-lg text-gray-900 mt-1">Character Keychain Set</h3>
+            <p class="text-gray-500 text-sm mt-1 mb-3">Panda, Stitch & more — choose your favorite.</p>
+            <p class="text-blue-600 font-bold">From RM 12.00</p>
+          </div>
+        </a>
+
+        <!-- Product 5 -->
+        <a href="product-details.html?id=helmet" class="product-card product-item bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm transition duration-300" data-category="props">
+          <div class="aspect-square overflow-hidden bg-gray-50">
+            <img src="images/helmet-sword.jpg" alt="Mandalorian Helmet" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-medium text-blue-600 uppercase tracking-wide">Props</span>
+            <h3 class="font-bold text-lg text-gray-900 mt-1">Mandalorian Helmet (Display)</h3>
+            <p class="text-gray-500 text-sm mt-1 mb-3">Detailed helmet prop for display or cosplay.</p>
+            <p class="text-blue-600 font-bold">RM 120.00</p>
+          </div>
+        </a>
+
+        <!-- Product 6 -->
+        <a href="product-details.html?id=sword" class="product-card product-item bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm transition duration-300" data-category="props">
+          <div class="aspect-square overflow-hidden bg-gray-50">
+            <img src="images/helmet-sword.jpg" alt="Sword Prop" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-medium text-blue-600 uppercase tracking-wide">Props</span>
+            <h3 class="font-bold text-lg text-gray-900 mt-1">Sword Prop (Cosplay)</h3>
+            <p class="text-gray-500 text-sm mt-1 mb-3">Lightweight and detailed cosplay sword.</p>
+            <p class="text-blue-600 font-bold">RM 100.00</p>
+          </div>
+        </a>
+
+        <!-- Product 7 -->
+        <a href="product-details.html?id=anime-figure" class="product-card product-item bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm transition duration-300" data-category="custom">
+          <div class="aspect-square overflow-hidden bg-gray-50 flex items-center justify-center">
+            <img src="images/anime-figure.jpg" alt="Custom Anime Figure" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-medium text-blue-600 uppercase tracking-wide">Custom</span>
+            <h3 class="font-bold text-lg text-gray-900 mt-1">Anime Figure (Custom)</h3>
+            <p class="text-gray-500 text-sm mt-1 mb-3">Fully customizable anime-style figure.</p>
+            <p class="text-blue-600 font-bold">From RM 80.00</p>
+          </div>
+        </a>
+
+        <!-- Product 8 - Custom CTA -->
+        <a href="custom-order.html" class="product-card product-item bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl overflow-hidden shadow-sm transition duration-300 flex flex-col justify-center items-center text-center p-8 text-white" data-category="custom">
+          <svg class="w-12 h-12 mb-4 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/></svg>
+          <h3 class="font-bold text-xl mb-2">Custom 3D Print</h3>
+          <p class="text-blue-100 text-sm mb-4">Have your own design? Tell us what you need and we’ll make it.</p>
+          <span class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-blue-600 font-semibold text-sm">Request Quote →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold text-gray-900 mb-3">Can't find what you're looking for?</h2>
+      <p class="text-gray-500 mb-6">We specialize in custom 3D printing. Send us your idea and we'll make it happen.</p>
+      <a href="custom-order.html" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition">Start Custom Order</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-gray-300 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">B</div>
+            <div>
+              <span class="text-white font-bold text-lg">Bromantic</span>
+              <span class="text-blue-400 font-medium text-sm block -mt-0.5">Enterprise</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-400">3D Printing • Custom Designs • Endless Possibilities</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html" class="hover:text-blue-400 transition">Home</a></li>
+            <li><a href="products.html" class="hover:text-blue-400 transition">Products</a></li>
+            <li><a href="about.html" class="hover:text-blue-400 transition">About Us</a></li>
+            <li><a href="gallery.html" class="hover:text-blue-400 transition">Gallery</a></li>
+            <li><a href="contact.html" class="hover:text-blue-400 transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Contact Us</h4>
+          <ul class="space-y-3 text-sm">
+            <li>+60 12 345 6789</li>
+            <li>bromanticenterprise@gmail.com</li>
+            <li>Selangor, Malaysia</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Follow Us</h4>
+          <div class="flex gap-3">
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-blue-600 flex items-center justify-center transition">IG</a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-blue-600 flex items-center justify-center transition">FB</a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-blue-600 flex items-center justify-center transition">TT</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-500">
+        <p>© 2025 Bromantic Enterprise. All rights reserved.</p>
+        <p>Made with ♥ using 3D Printing Technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/60123456789?text=Hi%2C%20I%20am%20interested%20in%20your%203D%20printed%20products." target="_blank" rel="noopener" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] rounded-full flex items-center justify-center shadow-lg wa-pulse transition-transform hover:scale-110">
+    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // Mobile menu
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Filter
+    const buttons = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.product-item');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => {
+          b.classList.remove('active', 'bg-blue-600', 'text-white');
+          b.classList.add('bg-gray-100', 'text-gray-700');
+        });
+        btn.classList.add('active', 'bg-blue-600', 'text-white');
+        btn.classList.remove('bg-gray-100', 'text-gray-700');
+        const filter = btn.dataset.filter;
+        items.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

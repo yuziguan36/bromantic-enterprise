@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | Bromantic Enterprise</title>
+  <meta name="description" content="Explore custom 3D printed products from Bromantic Enterprise. Ask us about colours, sizes and custom designs.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{brand:'#2563eb',dark:'#111827'}}}}</script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <header class="bg-slate-950 text-white"><div class="max-w-6xl mx-auto px-4 py-5 flex items-center justify-between"><a href="index.html" class="font-bold text-xl">Bromantic <span class="text-blue-400">Enterprise</span></a><nav class="flex gap-5 text-sm"><a href="index.html" class="hover:text-blue-300">Home</a><a href="products.html" class="hover:text-blue-300">Products</a><a href="contact.html" class="hover:text-blue-300">Contact</a></nav></div></header>
+  <main class="max-w-6xl mx-auto px-4 py-10 md:py-16">
+    <a href="products.html" class="text-blue-600 text-sm font-semibold">← Back to Products</a>
+    <div class="grid md:grid-cols-2 gap-10 mt-6 items-start">
+      <div class="bg-white rounded-3xl overflow-hidden border border-slate-200"><img id="product-image" src="images/hero-bg.png" alt="3D printed product" class="w-full aspect-square object-cover" onerror="this.onerror=null;this.src='images/hero-bg.png'"></div>
+      <div class="pt-2"><p id="product-category" class="text-xs uppercase tracking-[.2em] text-blue-600 font-bold">3D Printed Product</p><h1 id="product-name" class="text-3xl md:text-4xl font-bold mt-3">Product Details</h1><p id="product-price" class="text-2xl text-blue-600 font-bold mt-5">Ask for price</p><p id="product-description" class="text-slate-600 leading-7 mt-5">Product description.</p>
+        <div class="mt-7 bg-white rounded-2xl border border-slate-200 p-5"><h2 class="font-bold text-lg">Product Information</h2><dl class="mt-4 space-y-3 text-sm"><div class="flex justify-between gap-4"><dt class="text-slate-500">Customisation</dt><dd id="product-custom" class="font-medium text-right">Ask us</dd></div><div class="flex justify-between gap-4"><dt class="text-slate-500">Material / Size</dt><dd class="font-medium text-right">Confirm before ordering</dd></div><div class="flex justify-between gap-4"><dt class="text-slate-500">Availability</dt><dd class="font-medium text-right">Made to order / subject to confirmation</dd></div></dl></div>
+        <a id="enquire-button" href="custom-order.html" class="inline-flex mt-7 items-center justify-center rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-7 py-3">Enquire on WhatsApp</a><p class="text-xs text-slate-500 mt-3">Prices and product specifications shown here are examples. Please confirm the final details with Bromantic Enterprise before ordering.</p>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-slate-950 text-slate-400 py-7 text-center text-sm">© 2026 Bromantic Enterprise. All rights reserved.</footer>
+  <script>
+    const products={
+      dragon:{name:'Dragon Toy (Articulated)',category:'Toys',price:'RM 45.00',image:'images/red-dragon.jpg',description:'A detailed articulated dragon with poseable joints. Ask about available colours and sizes before ordering.',custom:'Colour and size options may be available'},
+      pikachu:{name:'Pikachu Keychain',category:'Key Chains',price:'RM 15.00',image:'images/pikachu.jpg',description:'A cute character-style keychain for bags, keys or gifts. Confirm character design availability and usage rights before placing an order.',custom:'Colour options may be available'},
+      castle:{name:'Mini Castle Display',category:'Display Items',price:'RM 80.00',image:'images/castle.jpg',description:'A miniature castle model for a desk, shelf or collection display.',custom:'Ask about size and finish'},
+      'keychain-set':{name:'Character Keychain Set',category:'Key Chains',price:'From RM 12.00',image:'images/keychains.jpg',description:'A set of small character-inspired keychains. Ask about available designs, colours and quantity pricing.',custom:'Design and colour options may be available'},
+      helmet:{name:'Helmet Display Prop',category:'Props & Accessories',price:'RM 120.00',image:'images/helmet-sword.jpg',description:'A detailed helmet-style prop for display or costume projects. Confirm dimensions and intended use before ordering.',custom:'Size and finish by enquiry'},
+      sword:{name:'Sword Prop (Cosplay)',category:'Props & Accessories',price:'RM 100.00',image:'images/helmet-sword.jpg',description:'A decorative, non-functional cosplay display prop. Confirm size, finish and safe intended use before ordering.',custom:'Size and finish by enquiry'},
+      'anime-figure':{name:'Custom Anime Figure',category:'Custom Prints',price:'From RM 80.00',image:'images/anime-figure.jpg',description:'A custom figure concept made to match your requested style. Send your reference and ask for a quote.',custom:'Custom request required'}
+    };
+    const id=new URLSearchParams(window.location.search).get('id')||'dragon';
+    const product=products[id]||products.dragon;
+    document.title=product.name+' | Bromantic Enterprise';
+    document.getElementById('product-name').textContent=product.name;
+    document.getElementById('product-category').textContent=product.category;
+    document.getElementById('product-price').textContent=product.price;
+    document.getElementById('product-description').textContent=product.description;
+    document.getElementById('product-custom').textContent=product.custom;
+    document.getElementById('product-image').src=product.image;
+    document.getElementById('product-image').alt=product.name;
+    document.getElementById('enquire-button').href='custom-order.html?product='+encodeURIComponent(product.name);
+  </script>
+</body>
+</html>
